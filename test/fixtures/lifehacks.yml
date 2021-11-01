@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user_id: 1
+  title: MyString
+  exp: MyString
+  file: 
+  time: 2021-11-01 08:05:21
+
+two:
+  user_id: 1
+  title: MyString
+  exp: MyString
+  file: 
+  time: 2021-11-01 08:05:21
