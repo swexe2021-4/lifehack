@@ -1,0 +1,24 @@
+<%= form_for @user, url:{action: :create} do |f| %>
+    
+    <p>登録に必要な情報を入力してください</p><br>
+    
+    <%= f.label(:name ,'名前（ニックネーム）：') %>
+        <%= f.text_field(:name) %><br>
+        
+    <%= f.label(:age,'年齢：') %>
+        <%= f.number_field(:age) %><br>
+        
+    <%=f.label(:gen ,'性別：') %>
+        <%= f.radio_button(:gen, "男性") %>
+            <%= f.label(:gen, "男性", value: "男性")  %>
+        <%= f.radio_button(:gen, "女性") %>
+            <%= f.label(:gen, "女性", value: "女性") %><br>
+            
+    <%= f.label(:email ,'メールアドレス：') %>
+        <%= f.email_field(:email) %><br>
+        
+    <%= f.label(:pass ,'パスワード：') %>
+        <%= f.password_field(:pass) %><br>
+    <%= f.submit '登録' %>
+<% end %>
+    
