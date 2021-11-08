@@ -1,0 +1,6 @@
+<% if session[:login_email] %>
+    <p><%= link_to 'ログアウト',tops_logout_path %></p>
+<% else %>
+    <p><%= link_to 'ログイン' ,tops_main_path %></p>
+<% end %>
+<p><%= link_to 'ユーザ一覧', users_path %></p>
