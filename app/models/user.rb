@@ -1,11 +1,7 @@
 class User < ApplicationRecord
-<<<<<<< HEAD
-<<<<<<< HEAD
     has_many :lifehacks, dependent: :destroy
     has_many :likes, dependent: :destroy
     has_many :like_lifehacks, through: :likes, source: :lifehacks
-=======
-=======
     
     has_many :passive_relationships, class_name: "Relationship", foreign_key: :follower_id
     has_many :followers ,through: :passive_relationships, source: :following
@@ -16,7 +12,6 @@ class User < ApplicationRecord
     has_many :followings, through: :active_relationships, source: :follower
     
     
->>>>>>> user_follow
     VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
     VALID_PASSWORD_REGEX = /\A(?=.*?[a-z])(?=.*?[\d])[a-z\d]+\z/i.freeze
     
@@ -31,5 +26,4 @@ class User < ApplicationRecord
         passive_relationships.find_by(following_id: user.id).present?
     end
     
->>>>>>> 289695f6f610ae6969f0f91e0a3049fe47e22255
 end
