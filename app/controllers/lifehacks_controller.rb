@@ -2,6 +2,8 @@ class LifehacksController < ApplicationController
     
     def index
         @lifehacks = Lifehack.all
+        lifehacks = Lifehack.includes(:like_users).sort{|a,b| b.like_users.size <=> a.like_users.size}
+        @lifehacks = Kaminari.paginate_array(lifehacks).page(params[:page]).per(5)
     end
     def new
         @lifehack = Lifehack.new

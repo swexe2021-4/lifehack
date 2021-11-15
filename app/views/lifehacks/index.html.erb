@@ -6,8 +6,10 @@
       <%= link_to '表示', lifehack_path(e) %>
       <% if e.likes.count > 0 %>
         <%= link_to '♥', like_path(e), method: :delete %>
+        <%= e.likes.count %>
       <% else %>
         <%= link_to '♡', likes_path(lifehack_id: e.id), method: :post %>
+        <%= e.likes.count %>
       <% end %>
     <p>
         <%= image_tag "/get_image/#{e.id}" , :width => '400', :height => '500'%>
@@ -15,6 +17,7 @@
     <% end %>
     </p>
 <% end %>
+<%= paginate @lifehacks %>
 
 <p> 
 <% if current_user %>
