@@ -1,3 +1,2 @@
 class LifehacksController < ApplicationController
-    
 end
