@@ -9,7 +9,20 @@
         <%= user.email %>
     <%= 'パスワード：'%>
         <%= user.pass%>
-    <%= link_to '削除',"/users/#{user.id}",method: :delete %><br>
+    <%= link_to '削除',"/users/#{user.id}",method: :delete %>
+    <% if session[:login_email] %>
+        <% if user.id != current_user.id %>
+            <% if user.followed_by?(current_user) %>
+                <%= link_to 'フォロー解除',"/users/#{user.id}/relationships/#{current_user.id}", method: :delete%><br>     
+            <%else%>
+                <%= link_to 'フォローする',user_relationships_path(user.id), method: :post%><br>
+            <%end%>
+        <%else%>
+            <br>
+        <%end%>
+    <%else%>
+        <br>
+    <% end %>
 <% end %>
 
 <p><%= link_to 'ユーザ作成','/users/new'%></p>

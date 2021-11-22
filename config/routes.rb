@@ -1,11 +1,17 @@
 Rails.application.routes.draw do
  root 'lifehacks#index'
- resources :users
  resources :lifehacks
  resources :likes
  resources :mylists
  resources :profiles
  resources :comments
+  get 'followers/index'
+  get 'follows/index'
+ resources :users do
+   resources :relationships, only: [:create,:destroy]
+    get 'followers', on: :member
+    get 'follows', on: :member
+ end
  post 'tops/login'
  get 'tops/logout'
  get 'tops/main'

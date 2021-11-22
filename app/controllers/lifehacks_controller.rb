@@ -29,4 +29,5 @@ class LifehacksController < ApplicationController
         lifehack = Lifehack.find(params[:id]) #↓詳細は説明を後述する
         send_data lifehack.file, disposition: :inline, type: 'image/png'
     end
+
 end
