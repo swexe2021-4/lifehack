@@ -1,0 +1,45 @@
+<% content_for(:title, 'プロフィール') %>
+<div class="container pt-3">
+    <div class="row">
+        <div class="col-md-10 affset-md-1 mb-5">
+            <h1 class="float-left"><%= t('.マイページ') %></h1>
+            <%= link_to "編集", edit_profile_path, class: 'btn btn-success float-right' %>
+            <br>
+            <%= link_to "戻る", lifehacks_path, class: 'btn btn-success float-right' %>
+        </div>
+        <div class="col-md-10 dooset-md-1">
+            <table class="table">
+                <tbody>
+                    <tr>
+                        <th>
+                            <span>氏名</span>
+                        </th>
+                        <td><%= current_user.name %></td>
+                    </tr>
+                    <tr>
+                        <th>
+                            <span>自己紹介</span>
+                        </th>
+                        <td><%= current_user.intro %></td>
+                    </tr>
+                    <tr>
+                        <th>
+                            <span>投稿一覧</span>
+                        </th>
+                        <td>
+                        <div class="content row">
+                            <% @lifehacks.each do |lifehack| %>
+                                <div class="content_post" >
+                                    <p><%= lifehack.text %></p>
+                                    <p><%= image_tag lifehack.image.veriant(resize: '500×500'), class: 'lifehack-image' if lifehack.image.attached?%></p>
+                                    <span class="name"><%= lifehack.name %></span>
+                                </div>
+                            <% end %>
+                        </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
