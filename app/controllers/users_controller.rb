@@ -28,5 +28,10 @@ class UsersController < ApplicationController
         user.destroy
         redirect_to '/users'
     end
-    
+    def show
+        @lifehacks = @q.result(distinct:true).paginate(page:params[:page]).where(user_id:@user.id)
+    end
+    def user_params_update
+        params.require(:user).permit(:name, :intro)
+    end
 end

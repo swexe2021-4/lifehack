@@ -24,6 +24,11 @@
   <%= link_to '投稿する', new_lifehack_path %>
 <% end %>
 </p>
+<p>
+<% if current_user %>
+<%= link_to 'マイページ', "/profiles/#{current_user.id}" %>
+<% end %>
+</p>
 <% if current_user %>
     <p><%= link_to 'ログアウト',tops_logout_path %></p>
 <% else %>
