@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class MylistsControllerTest < ActionDispatch::IntegrationTest
+class MylistNameTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end

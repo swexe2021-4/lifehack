@@ -4,6 +4,8 @@ class LifehacksController < ApplicationController
         @lifehacks = Lifehack.all
         lifehacks = Lifehack.includes(:like_users).sort{|a,b| b.like_users.size <=> a.like_users.size}
         @lifehacks = Kaminari.paginate_array(lifehacks).page(params[:page]).per(5)
+        @mylist_rel = MylistRel.new
+        @mylist_name = MylistName.new
     end
     def new
         @lifehack = Lifehack.new

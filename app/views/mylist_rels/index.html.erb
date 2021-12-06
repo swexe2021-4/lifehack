@@ -1,0 +1,25 @@
+<% @lifehacks.each do |lifehack|  %>
+    <% @mylists.each do |mylist| %>
+        <% if lifehack.id == mylist.lifehack_id %>
+            <%= lifehack.title %>
+            <% if current_user %>
+    
+            <%= link_to '削除', lifehack_path(lifehack), method: :delete %>
+            <%= link_to '表示', lifehack_path(lifehack) %>
+            <% if lifehack.likes.count > 0 %>
+                <%= link_to '♥', like_path(lifehack), method: :delete %>
+                <%= lifehack.likes.count %>
+            <% else %>
+                <%= link_to '♡', likes_path(lifehack_id: lifehack.id), method: :post %>
+                <%= lifehack.likes.count %>
+              <% end %>
+          
+          <p><%= image_tag "/get_image/#{lifehack.id}" , :width => '400', :height => '500'%></p>
+          
+          <%= link_to 'マイリストから外す', mylist_name_mylist_rel_path(@mylist_name.id,lifehack.id),method: :delete %>
+          <%end%>
+        <%end%>
+    <%end%>
+<%end%>
+
+<%= link_to '戻る',:back %>
