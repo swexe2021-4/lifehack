@@ -12,7 +12,7 @@ Rails.application.routes.draw do
    resources :relationships, only: [:create,:destroy]
     get 'followers', on: :member
     get 'follows', on: :member
- end
+  end
  post 'tops/login'
  get 'tops/logout'
  get 'tops/main'
