@@ -1,0 +1,8 @@
+<h3>いいねした投稿一覧</h3>
+
+<div class="contents_like">
+  <% @likes.each do |like| %>
+    <% post = Post.find_by(id: like.post_id) %>
+    <%= post.title %>
+  <% end %>
+</div>

@@ -1,5 +1,10 @@
 class ProfilesController < ApplicationController
     def show
+<<<<<<< HEAD
+=======
+        @user = User.find_by(id: params[:id])
+        @lifehacks = Lifehack.where(user_id: params[:id])
+>>>>>>> profile
     end
     def edit
         @user = User.find(current_user.id)

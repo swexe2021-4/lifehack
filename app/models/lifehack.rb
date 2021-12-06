@@ -12,4 +12,7 @@ class Lifehack < ApplicationRecord
     def liked?(user) #いいね済みか調べる(true / false)
         like_users.include?(user)
     end
+    def user
+        return User.find_by(id: self.user_id)
+    end
 end

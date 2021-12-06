@@ -2,9 +2,8 @@
   <p>
     <%= e.title %>
     <% if current_user %>
-      <%= link_to '削除', lifehack_path(e), method: :delete %>
       <%= link_to '表示', lifehack_path(e) %>
-      <% if e.likes.count > 0 %>
+      <% if e.liked?(current_user) %>
         <%= link_to '♥', like_path(e), method: :delete %>
         <%= e.likes.count %>
       <% else %>
