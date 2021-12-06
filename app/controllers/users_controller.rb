@@ -29,13 +29,6 @@ class UsersController < ApplicationController
         user.destroy
         redirect_to '/users'
     end
-<<<<<<< HEAD
-    def show
-        @lifehacks = @q.result(distinct:true).paginate(page:params[:page]).where(user_id:@user.id)
-    end
-    def user_params_update
-        params.require(:user).permit(:name, :intro)
-=======
     def likes
         @user = User.find_by(id: params[:id])
         likes = Like.where(user_id: @user.id).pluck(:lifehack_id)
@@ -45,6 +38,10 @@ class UsersController < ApplicationController
     private
     def set_user
         @user = User.find(params[:id])
->>>>>>> profile
+    def show
+        @lifehacks = @q.result(distinct:true).paginate(page:params[:page]).where(user_id:@user.id)
+    end
+    def user_params_update
+        params.require(:user).permit(:name, :intro)
     end
 end
