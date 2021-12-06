@@ -1,7 +1,10 @@
 class LikesController < ApplicationController
     def index
-        @user = User.find_by(id: params[:id])
+        @user = User.find(params[:user_id])
         @likes = Like.where(user_id: @user.id)
+        @lifehacks = Lifehack.all
+        @mylist_rel = MylistRel.new
+        @mylist_name = MylistName.new
     end
     def create 
         lifehack = Lifehack.find(params[:lifehack_id])

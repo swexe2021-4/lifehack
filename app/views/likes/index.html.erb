@@ -1,8 +1,32 @@
 <h3>いいねした投稿一覧</h3>
-
-<div class="contents_like">
+<% @lifehacks.each do |lifehack| %>
   <% @likes.each do |like| %>
-    <% post = Post.find_by(id: like.post_id) %>
-    <%= post.title %>
+    <% if lifehack.id == like.lifehack_id %>
+      <%= lifehack.title %>
+      <% if current_user %>
+        <%= link_to '表示', lifehack_path(lifehack) %>
+        <% if lifehack.liked?(current_user) %>
+        <%= link_to '♥', like_path(lifehack), method: :delete %>
+        <%= lifehack.likes.count %>
+        <% else %>
+        <%= link_to '♡', likes_path(lifehack_id: lifehack.id), method: :post %>
+        <%= lifehack.likes.count %>
+        <% end %>
+      <% end %>
+            
+      <p><%= image_tag "/get_image/#{lifehack.id}" , :width => '400', :height => '500'%></p>
+            
+      <%= form_for @mylist_rel, url: lifehack_mylist_rels_path(lifehack.id), method: :post do |f| %>
+        <%= f.label :mylist_name_id,'マイリストに追加' %>
+        <%= f.collection_select :mylist_name_id, MylistName.where(user_id: current_user.id), :id, :name %>
+        <%= f.submit '追加する' %>
+      <% end %>
+              
+      <%= form_for @mylist_name,url: mylist_names_path, method: :post do |k| %>
+        <%= k.text_field :name,:placeholder => "新規マイリスト" %>
+        <%= k.submit '作成' %>
+      <% end %>
+    <% end %>
   <% end %>
-</div>
+<% end %>
+<%= link_to '戻る', :back %>
