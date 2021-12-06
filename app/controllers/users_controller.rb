@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+    before_action :set_user, only: [:likes]
     def index
         @user = User.all
     end
@@ -28,5 +29,20 @@ class UsersController < ApplicationController
         user.destroy
         redirect_to '/users'
     end
+    def likes
+        @user = User.find_by(id: params[:id])
+        likes = Like.where(user_id: @user.id).pluck(:lifehack_id)
+        @like_lifehacks = lifehack.find(likes)
+    end
     
+    private
+    def set_user
+        @user = User.find(params[:id])
+    end
+    def show
+        @lifehacks = @q.result(distinct:true).paginate(page:params[:page]).where(user_id:@user.id)
+    end
+    def user_params_update
+        params.require(:user).permit(:name, :intro)
+    end
 end

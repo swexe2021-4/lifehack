@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   get 'follows/index'
   
  resources :users do
+  get 'likes/index'
    resources :relationships, only: [:create,:destroy]
    get 'mylist_names/index'
     get 'followers', on: :member
@@ -28,4 +29,5 @@ Rails.application.routes.draw do
  get 'tops/logout'
  get 'tops/main'
  get 'get_image/:id', to: 'lifehacks#get_image'
+ 
 end

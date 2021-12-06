@@ -13,8 +13,7 @@ class User < ApplicationRecord
     has_many :followings, through: :active_relationships, source: :follower
     
     
-    #validation--------------------------------------------------------------------------------
-    
+
     VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
     VALID_PASSWORD_REGEX = /\A(?=.*?[a-z])(?=.*?[\d])[a-z\d]+\z/i.freeze
     
@@ -32,4 +31,16 @@ class User < ApplicationRecord
         passive_relationships.find_by(following_id: user.id).present?
     end
     
+    
+    has_many :lifehacks, dependent: :destroy
+    has_many :likes, dependent: :destroy
+    has_many :like_lifehacks, through: :likes, source: :lifehacks
+    validates :intro, presence: false, length: { maximum: 50 }
+    def liked_by?(lifehack_id)
+        likes.where(lifehack_id: lifehack_id).exists?
+    end
+    def lifehacks
+        return Lifehack.where(user_id: self.id)
+    end
+
 end
