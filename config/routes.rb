@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   get 'followers/index'
   get 'follows/index'
  resources :users do
+  get 'likes/index'
    resources :relationships, only: [:create,:destroy]
     get 'followers', on: :member
     get 'follows', on: :member
@@ -16,4 +17,5 @@ Rails.application.routes.draw do
  get 'tops/logout'
  get 'tops/main'
  get 'get_image/:id', to: 'lifehacks#get_image'
+ 
 end

@@ -31,5 +31,11 @@ class User < ApplicationRecord
     has_many :lifehacks, dependent: :destroy
     has_many :likes, dependent: :destroy
     has_many :like_lifehacks, through: :likes, source: :lifehacks
+    def liked_by?(lifehack_id)
+        likes.where(lifehack_id: lifehack_id).exists?
+    end
+    def lifehacks
+        return Lifehack.where(user_id: self.id)
+    end
 
 end
