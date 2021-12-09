@@ -35,14 +35,25 @@ class UsersController < ApplicationController
         @like_lifehacks = lifehack.find(likes)
     end
     
-    private
+  
     def set_user
         @user = User.find(params[:id])
     end
     def show
+        
         @lifehacks = @q.result(distinct:true).paginate(page:params[:page]).where(user_id:@user.id)
     end
     def user_params_update
         params.require(:user).permit(:name, :intro)
+    end
+    
+    def follows
+        user = User.find(params[:id])
+        @users = user.followings
+    end
+    
+    def followers
+        user = User.find(params[:id])
+        @users = user.followers
     end
 end

@@ -3,6 +3,7 @@ class Lifehack < ApplicationRecord
     has_many :likes, dependent: :destroy
     has_many :like_users, through: :likes, source: :user
     
+    
     has_many :mylist_rels, dependent: :destroy
     
     def like(user)

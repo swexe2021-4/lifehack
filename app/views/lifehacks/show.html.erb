@@ -1,19 +1,13 @@
-<p>
-    <strong>投稿者:</strong>
-    <%= "#{current_user.name}" %>
-</p>
-<p>
-    <strong>タイトル：</strong>
-    <%= @lifehack.title %>
-</p>
-<p>
-    <strong>内容：</strong>
-    <%= @lifehack.exp %>
-</p>
+<h1><%= @lifehack.title %></h1>
+<p><%= @lifehack.exp %></p>
 <p>
     <strong>ファイル</strong>
 </p>
 <p>
     <%= image_tag "/get_image/#{@lifehack.id}" , :width => '400', :height => '500'%>
+</p>
+<p>
+    <strong>投稿者:</strong>
+    <%= link_to "#{@user.name}",profile_path(@user.id)%>
 </p>
 <%= link_to 'Back', :back %>

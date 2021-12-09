@@ -10,14 +10,30 @@
   </head>
 
   <body>
+    
+    <h1>ライフハッカーズ</h1>
+    
+    <p>
+      <%= link_to 'ホーム',root_path %>
+      <% if current_user %>
+        <%= link_to 'マイページ',profile_path(current_user) %>
+        <%= link_to '新規投稿',new_lifehack_path %>
+        <%else%>
+        <%= link_to 'ログイン',tops_main_path %>
+        <%= link_to '新規ユーザ登録',new_user_path %>
+      <%end%>
+    </p>
+    
     <%= yield %>
     
     <p>
-        <% if session[:login_email] %>
+        <% if current_user %>
           <p><%= p "ログイン中です（#{current_user.name}さん）"%></p>
+          <p><%= link_to 'ログアウト',tops_logout_path %></p>
         <% else %>
           <p>ログインしていません</p>
         <% end %>
+        <p><%= link_to 'ユーザ一覧', users_path %></p>
     </p>
     
   </body>
