@@ -30,4 +30,6 @@ Rails.application.routes.draw do
  get 'tops/main'
  get 'get_image/:id', to: 'lifehacks#get_image'
  
+ get 'search' => 'lifehacks#search'
+ 
 end

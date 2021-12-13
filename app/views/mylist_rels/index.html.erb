@@ -5,6 +5,7 @@
             <%=link_to "#{lifehack.user.name}",profile_path(lifehack.user.id) %>
             
             <h1><%= link_to "#{lifehack.title}",lifehack_path(lifehack) %></h1>
+                <%= ((Time.current - lifehack.time) / 60).to_i.to_s + "分前" %><br>
             <p>
                 <%= image_tag "/get_image/#{lifehack.id}" , :width => '400', :height => '500'%>
             </p>

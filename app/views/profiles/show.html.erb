@@ -1,5 +1,7 @@
 <% @lifehacks.each do |e| %>
     <h1><%= link_to "#{e.title}",lifehack_path(e) %></h1>
+     <%= ((Time.current - e.time) / 60).to_i.to_s + "分前" %><br>
+
     <% if current_user %>
         <% if current_user.id == e.user.id %>
             <%= link_to'投稿を削除する', lifehack_path(e), method: :delete%>
@@ -16,6 +18,17 @@
             <%= link_to '♡', likes_path(lifehack_id: e.id), method: :post %>
             <%= e.likes.count %>
         <% end %>
+        
+        <%= form_for @mylist_rel, url: lifehack_mylist_rels_path(e.id), method: :post do |f| %>
+          <%= f.label :mylist_name_id,'マイリストに追加' %>
+          <%= f.collection_select :mylist_name_id, MylistName.where(user_id: current_user.id), :id, :name %>
+          <%= f.submit '追加する' %>
+        <% end %>
+        
+        <%= form_for @mylist_name,url: mylist_names_path, method: :post do |k| %>
+            <%= k.text_field :name,:placeholder => "新規マイリスト" %>
+            <%= k.submit '作成' %>
+        <% end %>  
     <% end %>
    
 <% end %>

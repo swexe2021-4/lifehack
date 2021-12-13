@@ -19,4 +19,9 @@ class Lifehack < ApplicationRecord
     def user
         return User.find_by(id: self.user_id)
     end
+    
+    def self.search(keyword)
+        where(["title like? OR exp like?", "%#{keyword}%", "%#{keyword}%"])
+    end
+    
 end
