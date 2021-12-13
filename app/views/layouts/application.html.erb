@@ -12,6 +12,12 @@
   <body>
     
     <h1>ライフハッカーズ</h1>
+    <div class="search-form">
+  <%= form_with url: search_path, method: :get, local: true do |f| %>
+    <%= f.text_field :keyword, value: @keyword %>
+    <%= f.submit "検索" %>
+  <% end %>
+</div>
     
     <p>
       <%= link_to 'ホーム',root_path %>

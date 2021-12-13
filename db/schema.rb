@@ -52,14 +52,6 @@ ActiveRecord::Schema.define(version: 2021_12_06_061916) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "mylists", force: :cascade do |t|
-    t.string "name"
-    t.integer "user_id"
-    t.integer "lifehack_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "profiles", force: :cascade do |t|
     t.integer "user_id"
     t.integer "lifehack_id"

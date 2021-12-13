@@ -13,9 +13,9 @@ class LifehacksController < ApplicationController
     def create
         
         if params[:lifehack][:file]
-            @lifehack = Lifehack.new(user_id: current_user.id, title: params[:lifehack][:title], exp: params[:lifehack][:exp], file: params[:lifehack][:file].read)
+            @lifehack = Lifehack.new(user_id: current_user.id, title: params[:lifehack][:title], exp: params[:lifehack][:exp], file: params[:lifehack][:file].read,time: Time.current)
         else
-            @lifehack = Lifehack.new(user_id: current_user.id, title: params[:lifehack][:title], exp: params[:lifehack][:exp])
+            @lifehack = Lifehack.new(user_id: current_user.id, title: params[:lifehack][:title], exp: params[:lifehack][:exp],time: Time.current)
         end
         if @lifehack.save
         #TODO: ツイートが成功したことをユーザに知らせる
@@ -27,21 +27,34 @@ class LifehacksController < ApplicationController
     def show
         @lifehack = Lifehack.find(params[:id])
         @user = User.find(@lifehack.user_id)
+        @mylist_rel = MylistRel.new
+        @mylist_name = MylistName.new
     end
     
     def destroy
         lifehack = Lifehack.find(params[:id])
         lifehack.destroy
-        redirect_to :back
+        redirect_to root_path
     end
     
     def get_image
         lifehack = Lifehack.find(params[:id]) #↓詳細は説明を後述する
         send_data lifehack.file, disposition: :inline, type: 'image/png'
     end
+<<<<<<< HEAD
     
     private
     def lifehack_params
         params.require(:post).permit(:lifehack_content)
+=======
+
+    def search
+      @lifehacks = Lifehack.search(params[:keyword])
+      @keyword = params[:keyword]
+        @lifehacks = Kaminari.paginate_array(@lifehacks).page(params[:page]).per(5)
+        @mylist_rel = MylistRel.new
+        @mylist_name = MylistName.new
+      render "index"
+>>>>>>> 7cf3e6318d13e24a5a4c8df74be9ac3393cad663
     end
 end
