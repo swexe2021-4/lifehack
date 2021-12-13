@@ -37,13 +37,11 @@ class LifehacksController < ApplicationController
     def show
         @lifehack = Lifehack.find(params[:id])
         @user = User.find(@lifehack.user_id)
-<<<<<<< HEAD
         @mylist_rel = MylistRel.new
         @mylist_name = MylistName.new
-=======
+
         @comments = @lifehack.comments
         @comment = current_user.comments.new
->>>>>>> comment
     end
     
     def destroy
@@ -56,13 +54,13 @@ class LifehacksController < ApplicationController
         lifehack = Lifehack.find(params[:id]) #↓詳細は説明を後述する
         send_data lifehack.file, disposition: :inline, type: 'image/png'
     end
-<<<<<<< HEAD
+
     
     private
     def lifehack_params
-<<<<<<< HEAD
+
         params.require(:post).permit(:lifehack_content)
-=======
+    end
 
     def search
       @lifehacks = Lifehack.search(params[:keyword])
@@ -71,9 +69,6 @@ class LifehacksController < ApplicationController
         @mylist_rel = MylistRel.new
         @mylist_name = MylistName.new
       render "index"
->>>>>>> 7cf3e6318d13e24a5a4c8df74be9ac3393cad663
-=======
         params.require(:lifehack).permit(:lifehack_content)
->>>>>>> comment
     end
 end

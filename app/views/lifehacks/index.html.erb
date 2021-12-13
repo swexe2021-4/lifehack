@@ -1,15 +1,8 @@
 <p id="alert"><%=  alert %></p>
-
-<h2><%=p "#{@page_title}"%></h2>
-
-<%= link_to "いいね順に並べる",like_sort_path %>
-
 <% @lifehacks.each do |e| %>
   <p>
     <%=link_to "#{e.user.name}",profile_path(e.user.id) %>
     <h1><%= link_to "#{e.title}",lifehack_path(e) %></h1>
-    
-    <%= ((Time.current - e.time) / 60).to_i.to_s + "分前" %><br>
     
     <p><%= image_tag "/get_image/#{e.id}" , :width => '400', :height => '500'%></p>
     <% if current_user %>
