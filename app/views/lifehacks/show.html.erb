@@ -16,4 +16,10 @@
 <p>
     <%= image_tag "/get_image/#{@lifehack.id}" , :width => '400', :height => '500'%>
 </p>
+<%= form_tag(model:[@lifehack, @comment], method: :lifehack) do |f| %>
+    <%= f.text_area :comment_content %>
+    <%= f.hidden_field :lifehack_id, value: @lifehack.id %>
+    <%= f.summit 'コメントする' %>
+<% end %>
+    
 <%= link_to 'Back', :back %>
