@@ -2,6 +2,9 @@ class MylistNamesController < ApplicationController
   def index
     @mylist_names = MylistName.where(user_id: params[:user_id])
     @mylist_name = MylistName.new
+    @user = User.find(params[:user_id])
+    
+    render :layout => 'layout/profile'
   end
 
   def create

@@ -26,7 +26,15 @@ class LifehacksController < ApplicationController
     end
     def show
         @lifehack = Lifehack.find(params[:id])
+        @user = User.find(@lifehack.user_id)
     end
+    
+    def destroy
+        lifehack = Lifehack.find(params[:id])
+        lifehack.destroy
+        redirect_to :back
+    end
+    
     def get_image
         lifehack = Lifehack.find(params[:id]) #↓詳細は説明を後述する
         send_data lifehack.file, disposition: :inline, type: 'image/png'

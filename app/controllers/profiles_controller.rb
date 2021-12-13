@@ -1,7 +1,9 @@
 class ProfilesController < ApplicationController
     def show
+       
         @user = User.find_by(id: params[:id])
-        @lifehacks = Lifehack.where(user_id: params[:id])
+        @lifehacks = Lifehack.where(user_id: params[:id]) 
+        render :layout => 'layout/profile'
     end
     def edit
         @user = User.find(current_user.id)

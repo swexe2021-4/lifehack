@@ -1,11 +1,11 @@
 <p id="alert"><%=  alert %></p>
 <% @lifehacks.each do |e| %>
   <p>
+    <%=link_to "#{e.user.name}",profile_path(e.user.id) %>
+    <h1><%= link_to "#{e.title}",lifehack_path(e) %></h1>
     
-    <%= e.title %>
-    
+    <p><%= image_tag "/get_image/#{e.id}" , :width => '400', :height => '500'%></p>
     <% if current_user %>
-      <%= link_to '表示', lifehack_path(e) %>
       <% if e.liked?(current_user) %>
         <%= link_to '♥', like_path(e), method: :delete %>
         <%= e.likes.count %>
@@ -14,13 +14,13 @@
         <%= e.likes.count %>
       <% end %>
       
-      <p><%= image_tag "/get_image/#{e.id}" , :width => '400', :height => '500'%></p>
+      
       
       <%= form_for @mylist_rel, url: lifehack_mylist_rels_path(e.id), method: :post do |f| %>
         <%= f.label :mylist_name_id,'マイリストに追加' %>
         <%= f.collection_select :mylist_name_id, MylistName.where(user_id: current_user.id), :id, :name %>
         <%= f.submit '追加する' %>
-        <%end%>
+      <%end%>
         
       <%= form_for @mylist_name,url: mylist_names_path, method: :post do |k| %>
       
@@ -32,21 +32,3 @@
     </p>
 <% end %>
 <%= paginate @lifehacks %>
-
-<p> 
-<% if current_user %>
-  <%= link_to '投稿する', new_lifehack_path %>
-  <%= link_to'マイリスト一覧',user_mylist_names_index_path(current_user.id) %>
-<% end %>
-</p>
-<p>
-<% if current_user %>
-<%= link_to 'マイページ', "/profiles/#{current_user.id}" %>
-<% end %>
-</p>
-<% if current_user %>
-    <p><%= link_to 'ログアウト',tops_logout_path %></p>
-<% else %>
-    <p><%= link_to 'ログイン' ,tops_main_path %></p>
-<% end %>
-<p><%= link_to 'ユーザ一覧', users_path %></p>

@@ -1,66 +1,21 @@
-<% content_for(:title, 'プロフィール') %>
-<div class="container pt-3">
-    <div class="row">
-        <div class="col-md-10 affset-md-1 mb-5">
-            <h1 class="float-left"><%= t('.マイページ') %></h1>
-            <%= link_to "編集", edit_profile_path(@user.id)  %>
-            <br>
-            <%= link_to "戻る", lifehacks_path(@user.id) %>
-        </div>
-        <div class="col-md-10 dooset-md-1">
-            <table class="table">
-                <tbody>
-                    <tr>
-                        <th>
-                            <span>氏名</span>
-                        </th>
-                        <td>
-                            <%= @user.name %>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
-                           <span>自己紹介</span>
-                        </th>
-                        <td>
-                            <%= @user.intro %>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
-                            <span>投稿一覧</span>
-                        </th>
-                        <td>
-                        <div class="content row">
-                                <% @lifehacks.each do |e| %>
-                                    <p><%= e.title %></p>
-                                    <% if current_user %>
-                                      <%= link_to '削除', lifehack_path(e), method: :delete %>
-                                      <%= link_to '表示', lifehack_path(e) %>
-                                      <% if e.likes.count > 0 %>
-                                        <%= link_to '♥', like_path(e), method: :delete %>
-                                        <%= e.likes.count %>
-                                      <% else %>
-                                        <%= link_to '♡', likes_path(lifehack_id: e.id), method: :post %>
-                                        <%= e.likes.count %>
-                                      <% end %>
-                                    <% end %>
-                                    <p>
-                                        <%= image_tag "/get_image/#{e.id}" , :width => '400', :height => '500'%>
-                                    </p>
-                                <% end %>
-                        </div>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <th>
-                            <span><%= link_to "いいねした投稿", "/users/#{@user.id}/likes/index" %></span>
-                        </th>
-                        <td></td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
-</div>
+<% @lifehacks.each do |e| %>
+    <h1><%= link_to "#{e.title}",lifehack_path(e) %></h1>
+    <% if current_user %>
+        <% if current_user.id == e.user.id %>
+            <%= link_to'投稿を削除する', lifehack_path(e), method: :delete%>
+        <%end%>
+    <% end %>
+    <p>
+        <%= image_tag "/get_image/#{e.id}" , :width => '400', :height => '500'%>
+    </p>
+    <% if current_user %>
+        <% if e.likes.count > 0 %>
+            <%= link_to '♥', like_path(e), method: :delete %>
+            <%= e.likes.count %>
+        <% else %>
+            <%= link_to '♡', likes_path(lifehack_id: e.id), method: :post %>
+            <%= e.likes.count %>
+        <% end %>
+    <% end %>
+   
+<% end %>

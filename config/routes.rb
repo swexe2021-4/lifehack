@@ -15,8 +15,8 @@ Rails.application.routes.draw do
   get 'likes/index'
    resources :relationships, only: [:create,:destroy]
    get 'mylist_names/index'
-    get 'followers', on: :member
-    get 'follows', on: :member
+   get 'followers', on: :member
+   get 'follows', on: :member
  end
 
  resources :mylist_rels, only: [:create]

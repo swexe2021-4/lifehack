@@ -5,10 +5,13 @@
         <%= link_to '削除', mylist_name_path(mylist_name.id),method: :delete %>
     <% end %>
 <%end%>
-<%= form_for @mylist_name,url: mylist_names_path, method: :post do |k| %>
-      
-        <%= k.text_field :name,:placeholder => "新規マイリスト" %>
-        <%= k.submit '作成' %>
-<%end%>
 
-<%= link_to '戻る',:back %>
+<% if current_user %>
+    <% if current_user.id == @user.id %>
+        <%= form_for @mylist_name,url: mylist_names_path, method: :post do |k| %>
+                
+            <%= k.text_field :name,:placeholder => "新規マイリスト" %>
+            <%= k.submit '作成' %>
+        <%end%>
+    <%end%>
+<%end%>

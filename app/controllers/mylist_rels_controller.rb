@@ -3,6 +3,8 @@ class MylistRelsController < ApplicationController
     @mylists = MylistRel.where(mylist_name_id: params[:mylist_name_id])
     @lifehacks = Lifehack.all
     @mylist_name = MylistName.find(params[:mylist_name_id])
+    @user = User.find(@mylist_name.user.id)
+    render :layout => 'layout/profile'
   end
 
   def create

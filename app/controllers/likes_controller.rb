@@ -5,6 +5,7 @@ class LikesController < ApplicationController
         @lifehacks = Lifehack.all
         @mylist_rel = MylistRel.new
         @mylist_name = MylistName.new
+        render :layout => 'layout/profile'
     end
     def create 
         lifehack = Lifehack.find(params[:lifehack_id])

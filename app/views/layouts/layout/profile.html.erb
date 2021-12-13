@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Profile</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+    
+    <h1>ライフハッカーズ</h1>
+    
+    <p>
+      <%= link_to 'ホーム',root_path %>
+      <% if current_user %>
+        <%= link_to 'マイページ',profile_path(current_user) %>
+        <%= link_to '新規投稿',new_lifehack_path %>
+        <%else%>
+        <%= link_to 'ログイン',tops_main_path %>
+        <%= link_to '新規ユーザ登録',new_user_path %>
+      <%end%>
+    </p>
+    
+    <p>
+      
+        <h3><%=link_to "←",:back %><%= @user.name %></h3>
+        <%= @user.followings.count %>
+        <%= link_to "フォロー", follows_user_path(@user.id) %>
+        <%= @user.followers.count %>
+        <%= link_to "フォロワー", followers_user_path(@user.id) %>
+        
+        <% if current_user == @user.id %>
+            <%= link_to "マイページ編集", edit_profile_path(@user.id)%>
+        <%end%>
+        
+        <% if current_user %>
+            <% if current_user != @user %>
+                <% if @user.followed_by?(current_user) %>
+                    <p><%=link_to "フォロー済み", user_relationships_path(@user.id), method: :delete %></p>
+                <% else %>
+                    <p><%=link_to "フォローする", user_relationships_path(@user.id), method: :post %></p>
+                <% end %>
+            <%end%>
+        <%else%>
+            <p>このユーザーをフォローするにはログインが必要です</p>
+        <%end%>
+        
+        <h4><%= @user.intro %></h4>
+    </p>
+    
+    <p>
+        <%= link_to 'ライフハック一覧', profile_path(@user.id)%>
+        <%= link_to "いいねした投稿", "/users/#{@user.id}/likes/index" %>
+        <%= link_to 'マイリスト一覧',user_mylist_names_index_path(@user.id) %>
+    </p>
+    
+    <%= yield %>
+    
+    <p>
+        <% if current_user %>
+          <p><%= p "ログイン中です（#{current_user.name}さん）"%></p>
+          <p><%= link_to 'ログアウト',tops_logout_path %></p>
+        <% else %>
+          <p>ログインしていません</p>
+        <% end %>
+        <p><%= link_to 'ユーザ一覧', users_path %></p>
+    </p>
+    
+  </body>
+</html>

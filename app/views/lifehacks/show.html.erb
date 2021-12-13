@@ -1,25 +1,22 @@
-<p>
-    <strong>投稿者:</strong>
-    <%= "#{current_user.name}" %>
-</p>
-<p>
-    <strong>タイトル：</strong>
-    <%= @lifehack.title %>
-</p>
-<p>
-    <strong>内容：</strong>
-    <%= @lifehack.exp %>
-</p>
+<h1><%= @lifehack.title %></h1>
+<p><%= @lifehack.exp %></p>
 <p>
     <strong>ファイル</strong>
 </p>
 <p>
     <%= image_tag "/get_image/#{@lifehack.id}" , :width => '400', :height => '500'%>
 </p>
+<<<<<<< HEAD
 <%= form_tag(model:[@lifehack, @comment], method: :lifehack) do |f| %>
     <%= f.text_area :comment_content %>
     <%= f.hidden_field :lifehack_id, value: @lifehack.id %>
     <%= f.summit 'コメントする' %>
 <% end %>
     
+=======
+<p>
+    <strong>投稿者:</strong>
+    <%= link_to "#{@user.name}",profile_path(@user.id)%>
+</p>
+>>>>>>> 384a732435688b9302874fef7263b71d1b6a4a2c
 <%= link_to 'Back', :back %>
