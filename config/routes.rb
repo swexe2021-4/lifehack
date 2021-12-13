@@ -32,4 +32,6 @@ Rails.application.routes.draw do
  
  get 'search' => 'lifehacks#search'
  
+ get 'like_sort' => 'lifehacks#like_sort'
+ 
 end

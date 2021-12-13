@@ -2,11 +2,21 @@ class LifehacksController < ApplicationController
     
     def index
         @lifehacks = Lifehack.all
+        @lifehacks = Kaminari.paginate_array(@lifehacks).page(params[:page]).per(5)
+        @mylist_rel = MylistRel.new
+        @mylist_name = MylistName.new
+        @page_title = "ホーム"
+    end
+    
+    def like_sort
         lifehacks = Lifehack.includes(:like_users).sort{|a,b| b.like_users.size <=> a.like_users.size}
         @lifehacks = Kaminari.paginate_array(lifehacks).page(params[:page]).per(5)
         @mylist_rel = MylistRel.new
         @mylist_name = MylistName.new
+        @page_title = "いいね順"
+        render 'index'
     end
+    
     def new
         @lifehack = Lifehack.new
     end
