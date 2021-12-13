@@ -20,13 +20,17 @@
 </div>
     
     <p>
-      <%= link_to 'ホーム',root_path %>
       <% if current_user %>
+      <div class="button02">
+        <%= link_to 'ホーム',root_path %>
         <%= link_to 'マイページ',profile_path(current_user) %>
         <%= link_to '新規投稿',new_lifehack_path %>
-        <%else%>
+      </div>
+      <%else%>
+      <div class="button02">
         <%= link_to 'ログイン',tops_main_path %>
         <%= link_to '新規ユーザ登録',new_user_path %>
+      </div>
       <%end%>
     </p>
     
