@@ -2,12 +2,12 @@ Rails.application.routes.draw do
  root 'lifehacks#index'
  resources :lifehacks do
   resources :mylist_rels, only: [:create,:destroy]
+  resources :comments, only: [:create]
  end
  
  resources :likes
  resources :mylists
  resources :profiles
- resources :comments
   get 'followers/index'
   get 'follows/index'
   

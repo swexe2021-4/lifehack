@@ -27,6 +27,8 @@ class LifehacksController < ApplicationController
     def show
         @lifehack = Lifehack.find(params[:id])
         @user = User.find(@lifehack.user_id)
+        @comments = @lifehack.comments
+        @comment = current_user.comments.new
     end
     
     def destroy
@@ -42,6 +44,6 @@ class LifehacksController < ApplicationController
     
     private
     def lifehack_params
-        params.require(:post).permit(:lifehack_content)
+        params.require(:lifehack).permit(:lifehack_content)
     end
 end

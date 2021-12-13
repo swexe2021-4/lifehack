@@ -15,7 +15,7 @@ ActiveRecord::Schema.define(version: 2021_12_06_061916) do
   create_table "comments", force: :cascade do |t|
     t.integer "user_id"
     t.integer "lifehack_id"
-    t.string "comment"
+    t.string "comment_content"
     t.datetime "time"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -47,14 +47,6 @@ ActiveRecord::Schema.define(version: 2021_12_06_061916) do
 
   create_table "mylist_rels", force: :cascade do |t|
     t.integer "mylist_name_id"
-    t.integer "lifehack_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "mylists", force: :cascade do |t|
-    t.string "name"
-    t.integer "user_id"
     t.integer "lifehack_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

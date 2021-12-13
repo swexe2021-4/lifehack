@@ -42,5 +42,6 @@ class User < ApplicationRecord
     def lifehacks
         return Lifehack.where(user_id: self.id)
     end
+    has_many :comments
 
 end

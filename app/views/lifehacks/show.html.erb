@@ -6,11 +6,18 @@
 <p>
     <%= image_tag "/get_image/#{@lifehack.id}" , :width => '400', :height => '500'%>
 </p>
-<%= form_tag(model:[@lifehack, @comment], method: :post) do |f| %>
-    <%= f.text_area :comment_content %>
+<%= form_with(model:[@lifehack, @comment],url: lifehack_comments_path(@lifehack.id), method: :post) do |f| %>
+    <%= f.text_area:comment_content %>
     <%= f.hidden_field :lifehack_id, value: @lifehack.id %>
-    <%= f.summit 'コメントする' %>
+    <br>
+    <%= f.submit 'コメントする' %>
 <% end %>
+<p>
+<% @comments.each do |comment| %>
+<br>
+<%= comment.comment_content %>
+<% end %>
+</p>
 <p>
     <strong>投稿者:</strong>
     <%= link_to "#{@user.name}",profile_path(@user.id)%>
