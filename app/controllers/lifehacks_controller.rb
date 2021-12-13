@@ -38,6 +38,9 @@ class LifehacksController < ApplicationController
         @user = User.find(@lifehack.user_id)
         @mylist_rel = MylistRel.new
         @mylist_name = MylistName.new
+        @comments = @lifehack.comments
+        @comment = current_user.comments.new
+
     end
     
     def destroy
@@ -50,8 +53,9 @@ class LifehacksController < ApplicationController
         lifehack = Lifehack.find(params[:id]) #↓詳細は説明を後述する
         send_data lifehack.file, disposition: :inline, type: 'image/png'
     end
-
-    
+    def lifehack_params
+        params.require(:post).permit(:lifehack_content)
+    end
     def search
       @lifehacks = Lifehack.search(params[:keyword])
       @keyword = params[:keyword]
