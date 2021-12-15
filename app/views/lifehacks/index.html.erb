@@ -1,8 +1,10 @@
-<p id="alert"><%=  alert %></p>
 <h2><%= p "#{@page_title}" %></h2>
 <div class="button02">
 <%= link_to "いいね順に並べる", like_sort_path %>
 </div>
+
+<%= link_to "いいね順に並べる", like_sort_path %>
+<%= link_to "フォーローユーザーの投稿", follow_sort_path %>
 <% @lifehacks.each do |e| %>
   <p>
     <%=link_to "#{e.user.name}",profile_path(e.user.id) %>

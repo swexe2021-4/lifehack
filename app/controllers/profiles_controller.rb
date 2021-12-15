@@ -10,6 +10,7 @@ class ProfilesController < ApplicationController
     end
     def edit
         @user = User.find(current_user.id)
+        
     end
     
     def update
@@ -25,6 +26,6 @@ class ProfilesController < ApplicationController
     private
     
     def user_params
-        params.require(:user).permit(:name,:intro,:lifehack)
+        params.require(:user).permit(:name,:intro,:lifehack,:icon)
     end
 end

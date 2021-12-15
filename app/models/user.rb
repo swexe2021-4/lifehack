@@ -43,5 +43,6 @@ class User < ApplicationRecord
         return Lifehack.where(user_id: self.id)
     end
     has_many :comments
-
+    
+    mount_uploader :icon, IconUploader
 end

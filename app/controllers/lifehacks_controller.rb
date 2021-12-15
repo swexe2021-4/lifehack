@@ -5,6 +5,7 @@ class LifehacksController < ApplicationController
         @lifehacks = Kaminari.paginate_array(@lifehacks).page(params[:page]).per(5)
         @mylist_rel = MylistRel.new
         @mylist_name = MylistName.new
+        @page_title = "ホーム"
     end
     
     def like_sort
@@ -13,6 +14,15 @@ class LifehacksController < ApplicationController
         @mylist_rel = MylistRel.new
         @mylist_name = MylistName.new
         @page_title = "いいね順"
+        render 'index'
+    end
+    
+    def follow_sort
+        @lifehacks = Lifehack.where(user_id:[current_user.followings.ids])
+        @lifehacks = Kaminari.paginate_array(@lifehacks).page(params[:page]).per(5)
+        @mylist_rel = MylistRel.new
+        @mylist_name = MylistName.new
+        @page_title = "フォーロー中"
         render 'index'
     end
     

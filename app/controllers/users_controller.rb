@@ -39,10 +39,12 @@ class UsersController < ApplicationController
     def set_user
         @user = User.find(params[:id])
     end
+    
     def show
         
         @lifehacks = @q.result(distinct:true).paginate(page:params[:page]).where(user_id:@user.id)
     end
+    
     def user_params_update
         params.require(:user).permit(:name, :intro)
     end

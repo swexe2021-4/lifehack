@@ -16,7 +16,7 @@ class MylistRelsController < ApplicationController
     else
       flash[:alert] = "すでに追加済です。"
     end
-    redirect_to lifehacks_path
+    (redirect_to request.referer) 
   end
   
   def destroy
