@@ -1,4 +1,7 @@
 class ApplicationController < ActionController::Base
+    
+
+    
     private
     def current_user
         if session[:login_email]
