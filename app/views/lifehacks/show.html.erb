@@ -4,12 +4,7 @@
 <p>
     <%= image_tag "/get_image/#{@lifehack.id}" , :width => '400', :height => '500'%>
 </p>
-<%= form_with(model:[@lifehack, @comment],url: lifehack_comments_path(@lifehack.id), method: :post) do |f| %>
-    <%= f.text_area:comment_content %>
-    <%= f.hidden_field :lifehack_id, value: @lifehack.id %>
-    <br>
-    <%= f.submit 'コメントする' %>
-<% end %>
+
 <p>
 <% @comments.each do |comment| %>
 <br>
@@ -20,13 +15,22 @@
     <strong>投稿者:</strong>
     <%= link_to "#{@user.name}",profile_path(@user.id)%>
 </p>
-<%= form_for @mylist_rel, url: lifehack_mylist_rels_path(@lifehack.id), method: :post do |f| %>
-  <%= f.label :mylist_name_id,'マイリストに追加' %>
-  <%= f.collection_select :mylist_name_id, MylistName.where(user_id: current_user.id), :id, :name %>
-  <%= f.submit '追加する' %>
-<% end %>
-
-<%= form_for @mylist_name,url: mylist_names_path, method: :post do |k| %>
-    <%= k.text_field :name,:placeholder => "新規マイリスト" %>
-    <%= k.submit '作成' %>
+    <%if current_user%>
+        <%= form_with(model:[@lifehack, @comment],url: lifehack_comments_path(@lifehack.id), method: :post) do |f| %>
+            <%= f.text_area:comment_content %>
+            <%= f.hidden_field :lifehack_id, value: @lifehack.id %>
+            <br>
+            <%= f.submit 'コメントする' %>
+        <% end %>
+    
+        <%= form_for @mylist_rel, url: lifehack_mylist_rels_path(@lifehack.id), method: :post do |f| %>
+          <%= f.label :mylist_name_id,'マイリストに追加' %>
+          <%= f.collection_select :mylist_name_id, MylistName.where(user_id: current_user.id), :id, :name %>
+          <%= f.submit '追加する' %>
+        <% end %>
+        
+        <%= form_for @mylist_name,url: mylist_names_path, method: :post do |k| %>
+            <%= k.text_field :name,:placeholder => "新規マイリスト" %>
+            <%= k.submit '作成' %>
+    <%end%>
 <% end %>  

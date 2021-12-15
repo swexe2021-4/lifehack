@@ -49,8 +49,9 @@ class LifehacksController < ApplicationController
         @mylist_rel = MylistRel.new
         @mylist_name = MylistName.new
         @comments = @lifehack.comments
-        @comment = current_user.comments.new
-
+        if current_user
+            @comment = current_user.comments.new
+        end
     end
     
     def destroy

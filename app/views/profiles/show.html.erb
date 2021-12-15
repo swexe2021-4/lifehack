@@ -7,9 +7,11 @@
             <%= link_to'投稿を削除する', lifehack_path(e), method: :delete%>
         <%end%>
     <% end %>
-    <p>
-        <%= image_tag "/get_image/#{e.id}" , :width => '400', :height => '500'%>
-    </p>
+        <%if "/get_image/#{e.id}"== nil%>
+        <p>
+            <%= image_tag "/get_image/#{e.id}" , :width => '400', :height => '500'%>
+        </p>
+        <%end%>
     <% if current_user %>
         <% if e.likes.count > 0 %>
             <%= link_to '♥', like_path(e), method: :delete %>
