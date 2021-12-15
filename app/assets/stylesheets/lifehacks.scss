@@ -4,13 +4,16 @@
 body{
     background-color: #FFFFCC;
 }
+.content {
+  display: right;
+}
 .button02 a {
   display: inline-block;
   justify-content: space-between;
   align-items: center;
   margin: 0;
-  padding: 1em 2em;
-  width: 130px;
+  padding: 0em 1em;
+  width: 145px;
   color: #333;
   font-size: 18px;
   font-weight: 700;

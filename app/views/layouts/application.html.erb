@@ -33,17 +33,21 @@
       </div>
       <%end%>
     </p>
-    
+    <div class="content">
     <%= yield %>
-    
+    </div>
     <p>
         <% if current_user %>
           <p><%= p "ログイン中です（#{current_user.name}さん）"%></p>
-          <p><%= link_to 'ログアウト',tops_logout_path %></p>
+          <div class="button02">
+          <%= link_to 'ログアウト',tops_logout_path %>
+          </div>
         <% else %>
           <p>ログインしていません</p>
         <% end %>
-        <p><%= link_to 'ユーザ一覧', users_path %></p>
+        <div class="button02">
+        <%= link_to 'ユーザ一覧', users_path %>
+        </div>
     </p>
     
   </body>

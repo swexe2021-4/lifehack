@@ -19,7 +19,7 @@
   <% end %>
 </div>
     
-    <p>
+    <div class="button02">
       <%= link_to 'ホーム',root_path %>
       <% if current_user %>
         <%= link_to 'マイページ',profile_path(current_user) %>
@@ -28,17 +28,18 @@
         <%= link_to 'ログイン',tops_main_path %>
         <%= link_to '新規ユーザ登録',new_user_path %>
       <%end%>
-    </p>
+    </div>
     
     <p>
       
-        <h3><%=link_to "←",:back %><%= @user.name %></h3>
+        <h3><%=link_to "←",:back %></h3>
+        <h4><%= @user.name %></h4>
         <%= @user.followings.count %>
         <%= link_to "フォロー", follows_user_path(@user.id) %>
         <%= @user.followers.count %>
         <%= link_to "フォロワー", followers_user_path(@user.id) %>
         
-        <% if current_user == @user.id %>
+        <% if current_user.id == @user.id %>
             <%= link_to "マイページ編集", edit_profile_path(@user.id)%>
         <%end%>
         
@@ -57,22 +58,26 @@
         <h4><%= @user.intro %></h4>
     </p>
     
-    <p>
+    <div class="button02">
         <%= link_to 'ライフハック一覧', profile_path(@user.id)%>
         <%= link_to "いいねした投稿", "/users/#{@user.id}/likes/index" %>
         <%= link_to 'マイリスト一覧',user_mylist_names_index_path(@user.id) %>
-    </p>
+    </div>
     
     <%= yield %>
     
     <p>
         <% if current_user %>
           <p><%= p "ログイン中です（#{current_user.name}さん）"%></p>
-          <p><%= link_to 'ログアウト',tops_logout_path %></p>
+          <div class="button02">
+            <%= link_to 'ログアウト',tops_logout_path %>
+          </div>
         <% else %>
           <p>ログインしていません</p>
         <% end %>
-        <p><%= link_to 'ユーザ一覧', users_path %></p>
+        <div class="button02">
+          <%= link_to 'ユーザ一覧', users_path %>
+        </div>
     </p>
     
   </body>
