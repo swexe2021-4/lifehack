@@ -11,15 +11,17 @@
     <%=link_to "#{e.user.name}",profile_path(e.user.id) %>
     <h1><%= link_to "#{e.title}",lifehack_path(e) %></h1>
     
-    <p><%= image_tag "/get_image/#{e.id}" , :width => '400', :height => '500'%></p>
-    <% if current_user %>
-      <% if e.liked?(current_user) %>
-        <%= link_to '♥', like_path(e), method: :delete %>
-        <%= e.likes.count %>
-      <% else %>
-        <%= link_to '♡', likes_path(lifehack_id: e.id), method: :post %>
-        <%= e.likes.count %>
-      <% end %>
+      <%if "/get_image/#{e.id}"== nil%>
+        <p><%= image_tag "/get_image/#{e.id}" , :width => '400', :height => '500'%></p>
+        <% if current_user %>
+          <% if e.liked?(current_user) %>
+            <%= link_to '♥', like_path(e), method: :delete %>
+            <%= e.likes.count %>
+          <% else %>
+            <%= link_to '♡', likes_path(lifehack_id: e.id), method: :post %>
+            <%= e.likes.count %>
+        <% end %>
+      <%end%>
       
       
       
