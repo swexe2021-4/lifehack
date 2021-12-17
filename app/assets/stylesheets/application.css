@@ -12,10 +12,10 @@ body{
     background-color: #FFFFCC;
 }
 #about .inner {
-  width: 520px; 
+  width: 520px; /* 好きな幅 */
   max-width: 100%;
   margin: 0 auto;
-
+  padding: 24px;
   background: #fff59d;
 }
 #about  {
@@ -31,7 +31,10 @@ body{
   display: inline-block;
   justify-content: space-between;
   align-items: center;
-
+  display: inline;
+  margin: 0;
+  padding: 0em 1em;
+  width: 145px;
   color: #333;
   font-size: 18px;
   font-weight: 700;
