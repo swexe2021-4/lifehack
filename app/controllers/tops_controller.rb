@@ -1,5 +1,6 @@
 class TopsController < ApplicationController
     def main
+        @page_title = "ログインページ"
         render 'login'
     end
 

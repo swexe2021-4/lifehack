@@ -5,6 +5,7 @@ class LikesController < ApplicationController
         @lifehacks = Lifehack.all
         @mylist_rel = MylistRel.new
         @mylist_name = MylistName.new
+        @page_title = "いいねした投稿"
         render :layout => 'layout/profile'
     end
     def create 

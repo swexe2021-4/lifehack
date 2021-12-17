@@ -1,8 +1,12 @@
+<%= stylesheet_link_tag "life/lifehacks", :media => "all" %>
+ <div class="content">
+<br>
 <%= form_tag tops_login_path, method: :post do %>
-  <%= label_tag :email, 'メールアドレス：' %> 
-  <%= text_field_tag :email %> <br>
-  <%= label_tag :pass, 'パスワード：' %> 
-  <%= password_field_tag :pass %> <br>
+  <h4><%= label_tag :email, 'メールアドレス：' %> 
+  <%= text_field_tag :email %> <br></h4>
+  <h4><%= label_tag :pass, 'パスワード：' %> 
+  <%= password_field_tag :pass %> <br></h4>
   <%= submit_tag 'ログイン' %>
 <% end %>
 <p><%= link_to '新規登録', new_user_path %></p>
+</div>

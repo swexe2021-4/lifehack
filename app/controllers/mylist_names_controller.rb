@@ -3,6 +3,7 @@ class MylistNamesController < ApplicationController
     @mylist_names = MylistName.where(user_id: params[:user_id])
     @mylist_name = MylistName.new
     @user = User.find(params[:user_id])
+    @page_title = "マイページ一覧"
     
     render :layout => 'layout/profile'
   end

@@ -5,11 +5,13 @@ class ProfilesController < ApplicationController
         @lifehacks = Lifehack.where(user_id: params[:id]) 
         @mylist_rel = MylistRel.new
         @mylist_name = MylistName.new
+        @page_title = "#{@user.name}の投稿"
         render :layout => 'layout/profile'
         
     end
     def edit
         @user = User.find(current_user.id)
+        @page_title = "マイページ編集"
         
     end
     

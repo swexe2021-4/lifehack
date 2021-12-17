@@ -4,6 +4,7 @@ class MylistRelsController < ApplicationController
     @lifehacks = Lifehack.all
     @mylist_name = MylistName.find(params[:mylist_name_id])
     @user = User.find(@mylist_name.user.id)
+    @page_title = "#{@mylist_name.name}"
     render :layout => 'layout/profile'
   end
 

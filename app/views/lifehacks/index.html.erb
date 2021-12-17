@@ -1,18 +1,22 @@
-<h2><%= p "#{@page_title}" %></h2>
+<%= stylesheet_link_tag "life/lifehacks", :media => "all" %>
+
 <%if current_user%>
   <div class="button02">
   <%= link_to "いいね順に並べる", like_sort_path %>
   <%= link_to "フォロー中のユーザーの投稿", follow_sort_path %>
+  </div>
   <%end%>
-</div>
 
-<% @lifehacks.each do |e| %>
-  <p>
-    <%=link_to "#{e.user.name}",profile_path(e.user.id) %>
-    <h1><%= link_to "#{e.title}",lifehack_path(e) %></h1>
-    
-      <%if "/get_image/#{e.id}"== nil%>
+
+  <% @lifehacks.each do |e| %>
+  <div class="content">
+    <p>
+      <%=link_to "#{e.user.name}",profile_path(e.user.id) %>
+      <h1><%= link_to "#{e.title}",lifehack_path(e) %></h1>
+      
+      <%if e.file != nil%>
         <p><%= image_tag "/get_image/#{e.id}" , :width => '400', :height => '500'%></p>
+      <%end%>
         <% if current_user %>
           <% if e.liked?(current_user) %>
             <%= link_to '♥', like_path(e), method: :delete %>
@@ -21,23 +25,22 @@
             <%= link_to '♡', likes_path(lifehack_id: e.id), method: :post %>
             <%= e.likes.count %>
         <% end %>
-      <%end%>
-      
-      
-      
-      <%= form_for @mylist_rel, url: lifehack_mylist_rels_path(e.id), method: :post do |f| %>
-        <%= f.label :mylist_name_id,'マイリストに追加' %>
-        <%= f.collection_select :mylist_name_id, MylistName.where(user_id: current_user.id), :id, :name %>
-        <%= f.submit '追加する' %>
-      <%end%>
         
-      <%= form_for @mylist_name,url: mylist_names_path, method: :post do |k| %>
-      
-        <%= k.text_field :name,:placeholder => "新規マイリスト" %>
-        <%= k.submit '作成' %>
-      <%end%>
-      
-    <% end %>
-    </p>
-<% end %>
+        <div class = "mylist">
+        <%= form_for @mylist_rel, url: lifehack_mylist_rels_path(e.id), method: :post do |f| %>
+          <%= f.label :mylist_name_id,'マイリストに追加' %>
+          <%= f.collection_select :mylist_name_id, MylistName.where(user_id: current_user.id), :id, :name %>
+          <%= f.submit '追加する' %>
+        <%end%>
+        <%= form_for @mylist_name,url: mylist_names_path, method: :post do |k| %>
+          <%= k.text_field :name,:placeholder => "新規マイリスト" %>
+          <%= k.submit '作成' %>
+        <%end%>
+        </div>
+      <% end %>
+       <%= ((Time.current - e.time) / 60).to_i.to_s + "分前" %><br>
+      </p>
+      </div>
+  <% end %>
+
 <%= paginate @lifehacks %>

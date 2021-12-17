@@ -1,36 +1,44 @@
-<h3>いいねした投稿一覧</h3>
+<%= stylesheet_link_tag "life/lifehacks", :media => "all" %>
+<br>
 <% @lifehacks.each do |lifehack| %>
+<br>
   <% @likes.each do |like| %>
-    <% if lifehack.id == like.lifehack_id %>
-          
-          <%= lifehack.user.name %>
-      <h1><%= lifehack.title %></h1>
-      
-      <%= ((Time.current - lifehack.time) / 60).to_i.to_s + "分前" %><br>
-      <p>
-        <%= image_tag "/get_image/#{lifehack.id}" , :width => '400', :height => '500'%>
-      </p>
-      
-      <% if current_user %>
-      
-        <% if lifehack.liked?(current_user) %>
-          <%= link_to '♥', like_path(lifehack), method: :delete %>
-          <%= lifehack.likes.count %>
-        <% else %>
-          <%= link_to '♡', likes_path(lifehack_id: lifehack.id), method: :post %>
-          <%= lifehack.likes.count %>
-        <% end %>
+   <div class="content">
+
+      <% if lifehack.id == like.lifehack_id %>
+            <br>
+            <%= link_to "#{lifehack.user.name}",profile_path(lifehack.user.id) %>
+          <h1><%= link_to "#{lifehack.title}",lifehack_path(lifehack) %></h1>
         
-        <%= form_for @mylist_rel, url: lifehack_mylist_rels_path(lifehack.id), method: :post do |f| %>
-          <%= f.label :mylist_name_id,'マイリストに追加' %>
-          <%= f.collection_select :mylist_name_id, MylistName.where(user_id: current_user.id), :id, :name %>
-          <%= f.submit '追加する' %>
-        <% end %>
-          <%= form_for @mylist_name,url: mylist_names_path, method: :post do |k| %>
-            <%= k.text_field :name,:placeholder => "新規マイリスト" %>
-            <%= k.submit '作成' %>
-          <% end %>  
-      <% end %>      
-    <% end %>
+        <%= ((Time.current - lifehack.time) / 60).to_i.to_s + "分前" %><br>
+        <%if lifehack.file != nil%>
+        <p>
+          <%= image_tag "/get_image/#{lifehack.id}" , :width => '400', :height => '500'%>
+        </p>
+        <%end%>
+        
+        <% if current_user %>
+        
+          <% if lifehack.liked?(current_user) %>
+            <%= link_to '♥', like_path(lifehack), method: :delete %>
+            <%= lifehack.likes.count %>
+          <% else %>
+            <%= link_to '♡', likes_path(lifehack_id: lifehack.id), method: :post %>
+            <%= lifehack.likes.count %>
+          <% end %>
+          
+          <%= form_for @mylist_rel, url: lifehack_mylist_rels_path(lifehack.id), method: :post do |f| %>
+            <%= f.label :mylist_name_id,'マイリストに追加' %>
+            <%= f.collection_select :mylist_name_id, MylistName.where(user_id: current_user.id), :id, :name %>
+            <%= f.submit '追加する' %>
+          <% end %>
+            <%= form_for @mylist_name,url: mylist_names_path, method: :post do |k| %>
+              <%= k.text_field :name,:placeholder => "新規マイリスト" %>
+              <%= k.submit '作成' %>
+            <% end %>  
+            <br>
+        <% end %>      
+      <% end %>
+    </div>
   <% end %>
 <% end %>

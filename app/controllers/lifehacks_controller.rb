@@ -22,12 +22,13 @@ class LifehacksController < ApplicationController
         @lifehacks = Kaminari.paginate_array(@lifehacks).page(params[:page]).per(5)
         @mylist_rel = MylistRel.new
         @mylist_name = MylistName.new
-        @page_title = "フォーロー中"
+        @page_title = "フォロー中の投稿"
         render 'index'
     end
     
     def new
         @lifehack = Lifehack.new
+        @page_title = "新規投稿"
     end
     def create
         
@@ -49,6 +50,7 @@ class LifehacksController < ApplicationController
         @mylist_rel = MylistRel.new
         @mylist_name = MylistName.new
         @comments = @lifehack.comments
+        @page_title = "#{@lifehack.title}の詳細ページ"
         if current_user
             @comment = current_user.comments.new
         end

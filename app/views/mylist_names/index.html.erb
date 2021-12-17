@@ -1,9 +1,13 @@
-<%= 'マイリスト一覧' %><br>
+<%= stylesheet_link_tag "life/lifehacks", :media => "all" %>
+
+
 <% @mylist_names.each do |mylist_name| %>
-    <%= link_to "#{mylist_name.name}",mylist_name_mylist_rels_index_path(mylist_name.id) %>
+ <div class="content">
+    <h1><%= link_to "#{mylist_name.name}",mylist_name_mylist_rels_index_path(mylist_name.id) %></h1>
     <% if current_user %>
         <%= link_to '削除', mylist_name_path(mylist_name.id),method: :delete %>
     <% end %>
+    </div>
 <%end%>
 
 <% if current_user %>

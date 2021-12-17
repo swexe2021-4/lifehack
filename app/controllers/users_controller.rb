@@ -6,6 +6,7 @@ class UsersController < ApplicationController
     
     def new 
         @user = User.new
+        @page_title = "新規ユーザ登録"
     end
     
     def create
@@ -52,10 +53,12 @@ class UsersController < ApplicationController
     def follows
         user = User.find(params[:id])
         @users = user.followings
+        @page_title = "フォロー中のユーザー"
     end
     
     def followers
         user = User.find(params[:id])
         @users = user.followers
+        @page_title = "フォワー一覧"
     end
 end

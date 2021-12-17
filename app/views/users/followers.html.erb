@@ -1,5 +1,6 @@
-<h1>フォロワー一覧</h1>
+<%= stylesheet_link_tag "life/lifehacks", :media => "all" %>
 <% @users.each do |user| %>
+ <div class="content">
     <% if current_user %>
         <% if current_user != user %>
             <% if user.followed_by?(current_user) %>
@@ -7,8 +8,11 @@
             <% else %>
                 <p><%= link_to "#{user.name}","/profiles/#{user.id}" %>  <%=link_to "フォローする", user_relationships_path(user.id), method: :post %></p>
             <% end %>
+        <%else%>
+        <p><%= link_to "#{user.name}","/profiles/#{user.id}" %>
         <% end %>
     <%else%>
         <p><%= link_to "#{user.name}","/profiles/#{user.id}" %>
     <%end%>
+    </div>
 <% end %>

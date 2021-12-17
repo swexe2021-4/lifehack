@@ -1,5 +1,7 @@
    
-<% if @lifehack.errors.present? %>
+<%= stylesheet_link_tag "life/lifehacks", :media => "all" %>
+<div class="content">
+     <% if @lifehack.errors.present? %>
     <span style="color:red;">
         <h3>エラーがあります。</h3>
         <ul>
@@ -9,7 +11,8 @@
         </ul>
     </span>
 <% end %>
-<%= form_for @lifehack , url: {action: :create} do |f| %>
+<%= form_for @lifehack , url: {action: :create} do |f| %> 
+<br>
 <%= f.label :title, 'タイトル' %>
 <%= f.text_field :title %>
 <%= f.label :exp, '内容' %>
@@ -19,4 +22,7 @@
 <%= f.file_field :file %>
 </p>
 <%= f.submit '投稿する' %>
+
 <% end %>
+<br>
+</div>

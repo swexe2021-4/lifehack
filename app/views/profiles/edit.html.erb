@@ -1,9 +1,9 @@
-<% content_for(:title, 'プロフィール編集') %>
+<%= stylesheet_link_tag "life/lifehacks", :media => "all" %>
+ <div class="content">
 <div class= "container pt-3">
     <div class="row">
-        <div class="col-md-10 offset-md-1 mb-5">
-            <h1 class="float-left"><%= t('.プロフィール編集') %></h1>
-        </div>
+        <br>
+
         <div class="col-md-10 offset-md-1">
             <%= form_with model:@user, url: profile_path, local: true do |f| %>
                 <div class="form-group">
@@ -14,8 +14,12 @@
                     <%= f.label :intro %>
                     <%= f.text_field :intro, class: "form-control" %>
                 </div>
+                <br>
                 <%= f.submit ('変更'), class: "btn btn-primary" %>
+                
             <% end %>
+        <br>
         </div>
     </div>
+</div>
 </div>
