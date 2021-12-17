@@ -9,7 +9,7 @@
                 <%= link_to'投稿を削除する', lifehack_path(e), method: :delete%>
             <%end%>
         <% end %>
-            <%if "/get_image/#{e.id}"== nil%>
+            <%if "/get_image/#{e.id}"!= nil%>
             <p>
                 <%= image_tag "/get_image/#{e.id}" , :width => '400', :height => '500'%>
             </p>
