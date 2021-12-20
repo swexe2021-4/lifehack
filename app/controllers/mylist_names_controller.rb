@@ -3,7 +3,7 @@ class MylistNamesController < ApplicationController
     @mylist_names = MylistName.where(user_id: params[:user_id])
     @mylist_name = MylistName.new
     @user = User.find(params[:user_id])
-    @page_title = "マイページ一覧"
+    @page_title = "マイリスト一覧"
     
     render :layout => 'layout/profile'
   end
@@ -12,9 +12,9 @@ class MylistNamesController < ApplicationController
     mylistname = MylistName.create(user_id: current_user.id,
     name: params[:mylist_name][:name])
     if mylistname.save
-      redirect_to root_path
+      redirect_back(fallback_location: root_path)
     else
-      redirect_to root_path
+      redirect_back(fallback_location: root_path)
     end
   end
   

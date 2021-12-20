@@ -1,7 +1,7 @@
 class LifehacksController < ApplicationController
     
     def index
-        @lifehacks = Lifehack.all
+        @lifehacks = Lifehack.all.order(created_at: :desc)
         @lifehacks = Kaminari.paginate_array(@lifehacks).page(params[:page]).per(5)
         @mylist_rel = MylistRel.new
         @mylist_name = MylistName.new

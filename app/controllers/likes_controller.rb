@@ -13,7 +13,7 @@ class LikesController < ApplicationController
         unless lifehack.liked?(current_user)
           lifehack.like(current_user)
         end
-        redirect_to root_path
+        redirect_back(fallback_location: root_path)
     end
 
     def destroy
@@ -21,7 +21,7 @@ class LikesController < ApplicationController
         if lifehack.liked?(current_user)
           lifehack.unlike(current_user)
         end
-        redirect_to root_path
+       redirect_back(fallback_location: root_path)
     end
     def lifehack_params
         @lifehack = Lifehack.find(params[:lifehack_id])
